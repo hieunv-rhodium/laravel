@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>@yield('title')</title>
+    @yield('title')
 
     <!-- Styles -->
 @include('layouts.css')
