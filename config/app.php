@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
+        Socieboy\Alerts\AlertServiceProvider::class,
 
         /*
          * Package Service Providers...

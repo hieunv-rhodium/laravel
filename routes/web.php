@@ -11,12 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+// Auth route
+Auth::routes();
 
 // home page route
 Route::get('/','PagesController@index');
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+// test route
+Route::get('/test','PagesController@index');
+
+// widget route
+Route::resource('widget','WidgetController');

@@ -1,7 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container">
+     <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li>Send Reset Password</li>
+     </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -13,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -33,7 +37,10 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-btn fa-envelope"></i>
+                                        
                                     Send Password Reset Link
+                                    
                                 </button>
                             </div>
                         </div>

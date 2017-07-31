@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Widget;
+use Redirect;
 
-class TestController extends Controller
+class WidgetController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+     
     public function index()
     {
         //
-        $beatles = ['John','Paul','George','Ringo'];
-        alert()->overlay('Listen', 'I hear beatle music!', 'success');
-        return view('test.index',compact('beatles'));
+        $widgets = Widget::paginate(10);
+        return view('widget.index', compact('widgets'));
     }
 
     /**
@@ -27,6 +29,7 @@ class TestController extends Controller
     public function create()
     {
         //
+        return view('widget.create');
     }
 
     /**
@@ -37,7 +40,21 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         //
+        $this->validate($request, [
+
+            'name' => 'required|unique:widgets|string|max:30',
+
+        ]);
+
+        $widget = Widget::create(['name' => $request->name]);
+
+        $widget->save();
+
+        alert()->success('Congrats!', 'You made a Widget');
+
+        return Redirect::route('widget.index');
     }
 
     /**
