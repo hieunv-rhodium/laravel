@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Http\AuthTraits\OwnsRecord;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, OwnsRecord;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'is_subscribled' , 'password','is_admin','status_id'
     ];
 
     /**
@@ -26,4 +28,32 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * User has many widget
+     */
+    public function isAdmin()
+    {
+        return Auth::user()->is_admin == 1;
+    }
+
+    public function isActiveStatus()
+    {
+        return Auth::user()->status_id == 10;
+    }
+
+    public function widget()
+    {
+        return $this->hasMany('App\Widget');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany('App\Categories');
+    }
+
+    public function product()
+    {
+        return $this->hasMany('App\Products');
+    }
 }

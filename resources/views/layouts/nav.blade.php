@@ -23,6 +23,8 @@
                                         aria-expanded="false">Content <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/widget">Widgets</a></li>
+                        <li><a href="/categories">Categories</a></li>
+                        <li><a href="/product">Products</a></li>
                     </ul>
                 </li>
                 @if (Auth::check())

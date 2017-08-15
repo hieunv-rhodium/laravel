@@ -21,8 +21,33 @@ Auth::routes();
 // home page route
 Route::get('/','PagesController@index');
 
-// test route
-Route::get('/test','PagesController@index');
+Route::get('terms-of-service', 'PagesController@terms');
+
+// test route -- throttle chan so lan truy cap
+Route::get('/test','TestController@index')->middleware('auth', 'throttle:5');
+
+//Admin route
+
+Route::get('/admin','AdminController@index')->name('admin');
 
 // widget route
-Route::resource('widget','WidgetController');
+
+Route::get('/widget/create', 'WidgetController@create')->name('widget.create');
+
+Route::get('/widget/{widget}-{slug?}','WidgetController@show')->name('widget.show');
+
+Route::resource('widget','WidgetController', ['except' => ['show','create']]);
+
+
+// category route
+
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create');
+
+Route::get('/categories/{categories}-{slug?}', 'CategoryController@show')->name('categories.show');
+
+Route::resource('categories','CategoryController', ['except' => ['show','create']]);
+
+
+// product route
+
+Route::resource('product','ProductController');

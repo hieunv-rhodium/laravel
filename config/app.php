@@ -164,6 +164,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Creativeorange\Gravatar\GravatarServiceProvider::class,
         Socieboy\Alerts\AlertServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -228,6 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
