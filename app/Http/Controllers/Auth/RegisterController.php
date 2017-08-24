@@ -47,17 +47,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         $data['is_subscribed'] = empty($data['is_subscribed']) ? 0 : 1;
-        $data['term'] = empty($data['term']) ? 0 : 1;
+        $data['terms'] = empty($data['terms']) ? 0 : 1;
 
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'is_subsribed' => 'boolean',
-            'password' => 'required|string|min:6|confirmed',
-            'term' => 'accepted'
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'is_subscribed' => 'boolean',
+            'password' => 'required|min:6|confirmed',
+            'terms' => 'accepted'
         ]);
     }
+
 
     /**
      * Create a new user instance after a valid registration.
@@ -67,6 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $data['is_subscribed'] = empty($data['is_subscribed']) ? 0 : 1;
 
         return User::create([

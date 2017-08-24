@@ -27,6 +27,7 @@
                         <li><a href="/product">Products</a></li>
                     </ul>
                 </li>
+
                 @if (Auth::check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle"
@@ -38,20 +39,42 @@
                             <li>
                                 <a href="/logout"
                                    onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-                                    Logout
+                                   document.getElementById('logout-form').submit();">
+                                   Logout
                                 </a>
 
                                 <form id="logout-form" action="/logout" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+
+                            <li>
+                                <a href="/auth/facebook">
+
+                                    <i class="fa fa-facebook"></i>
+
+                                        &nbsp;&nbsp;
+                                        Sync
+
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                     <li><img class="circ" src="{{ Gravatar::get(Auth::user()->email)  }}"></li>
                 @else
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
+                    <li>
+                        <a href="/auth/facebook">
+
+                            <i class="fa fa-facebook"></i>
+
+                                &nbsp;&nbsp;
+                                Sign in
+
+                        </a>
+                    </li>
 
                 @endif
             </ul>

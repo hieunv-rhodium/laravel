@@ -14,7 +14,9 @@
 </head>
 
 <body role="document">
-    
+
+    @include('layouts.facebook');
+
     @include('layouts.nav')
 
     <div class="container theme-showcase" role="main">
