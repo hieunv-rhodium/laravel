@@ -50,7 +50,7 @@
     @endif
     
     {{ $widgets->links() }}
-    
+
     <div>
         <a href="/widget/create">
             <button type="button" class="btn btn-lg btn-primary">

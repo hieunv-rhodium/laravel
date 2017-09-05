@@ -13,7 +13,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//       View composer
+//        view()->composer('layouts.bottom', function($view){
+//
+//        $view->with('copyright', \App\Utilities\Copyright::displayNotice());
+//
+//        });
+
+        //share everywhere
+        $value = \App\Utilities\Copyright::displayNotice();
+
+        view()->share('copyright', $value);
+
     }
 
     /**
@@ -28,4 +39,5 @@ class AppServiceProvider extends ServiceProvider
         }
         // ...
     }
+
 }

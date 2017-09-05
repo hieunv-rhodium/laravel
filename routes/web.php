@@ -60,10 +60,39 @@ Route::get('terms-of-service', 'PagesController@terms');
 Route::get('test', 'TestController@index')->middleware(['auth', 'throttle:5']);
 
 
-// Widget routes
+// Widget route
 
 Route::get('widget/create',  'WidgetController@create')->name('widget.create');
 
 Route::get('widget/{id}-{slug?}', 'WidgetController@show')->name('widget.show');
 
 Route::resource('widget', 'WidgetController', ['except' => ['show', 'create']]);
+
+// Categories route
+
+Route::resource('categories','CategoryController');
+
+// Product route
+
+Route::resource('product','ProductController');
+
+//Profile route
+
+Route::get('show-profile','ProfileController@showProfileToUser')->name('show-profile');
+
+Route::get('determine-profile-route','ProfileController@determineProfileRoute')->name('determine-profile-route');
+
+Route::resource('profile', 'ProfileController');
+
+// User route
+
+Route::resource('user','UserController');
+
+// Setting route
+
+Route::get('settings' , 'SettingsController@edit');
+
+Route::post('settings', 'SettingsController@update')->name('user-update');
+
+Route::resource('marketing-image', 'MarketingImageController');
+
