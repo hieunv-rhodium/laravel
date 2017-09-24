@@ -21,5 +21,9 @@ trait ShowsImages
 
     }
 
+    private function notEnoughSliderImages($featuredImage, $activeImages)
+    {
+        return (!count($featuredImage) || !count($activeImages) >= 1) ? true : false;
+    }
 
 }

@@ -28,8 +28,8 @@ class CreateImageRequest extends FormRequest
             'image_name' => 'alpha_num|required|unique:marketing_images',
             'is_active' => 'required|boolean',
             'is_featured' => 'required|boolean',
-            'image' => 'required|mimes:jpeg,jpg,bmp,png|max:1000',
-
+            'image' => 'required|mimes:jpeg,jpg,bmp,png|max:2000',
+            'image_height' => 'integer|between:1,100'
 
         ];
     }

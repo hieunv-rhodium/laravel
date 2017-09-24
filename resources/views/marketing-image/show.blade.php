@@ -24,11 +24,13 @@
             <button type="button" class="btn btn-primary btn-lg">Edit Image</button></a>
 
     </div>
+
     <br><br>
 
     <hr/>
-    
+
     <div class="panel panel-default">
+
 
             <!-- Table -->
             <table class="table table-striped">
@@ -75,7 +77,20 @@
 
                 <tr>
 
+                    <th>Image Weight</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>{{ $marketingImage->image_weight }}</td>
+
+                </tr>
+
+                <tr>
+
                     <th>Primary Image</th>
+
 
                 </tr>
 
@@ -87,6 +102,8 @@
 
                     </td>
                 </tr>
+
+
 
                 <tr>
                     <td>
@@ -102,6 +119,7 @@
                             </form>
                         </div>
 
+
                     </td>
 
                 </tr>
@@ -116,17 +134,10 @@
         function ConfirmDelete()
         {
             var x = confirm("Are you sure you want to delete?");
-            
-            if (x){
-            
+            if (x)
                 return true;
-                
-            } else {
-            
+            else
                 return false;
-            
-            }
-                
         }
     </script>
 @endsection

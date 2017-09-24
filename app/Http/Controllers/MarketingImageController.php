@@ -13,11 +13,14 @@ class MarketingImageController extends Controller
 
     public function __construct()
     {
+
         $this->middleware('auth');
         $this->middleware('admin');
+
         $this->setImageDefaultsFromConfig('marketingImage');
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,11 +29,16 @@ class MarketingImageController extends Controller
 
     public function index()
     {
+
         $thumbnailPath = $this->thumbnailPath;
 
-        $marketingImages = MarketingImage::paginate(10);
+        $marketingImages = MarketingImage::orderBy('image_weight', 'asc')
+            ->paginate(10);
 
-        return view('marketing-image.index', compact('marketingImages', 'thumbnailPath'));
+        return view('marketing-image.index', compact(
+            'marketingImages',
+            'thumbnailPath'
+        ));
 
     }
 
@@ -46,6 +54,7 @@ class MarketingImageController extends Controller
         return view('marketing-image.create');
 
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -55,32 +64,27 @@ class MarketingImageController extends Controller
 
     public function store(CreateImageRequest $request)
     {
+
         //create new instance of model to save from form
-
         $marketingImage = new MarketingImage([
-
             'image_name'        => $request->get('image_name'),
             'image_extension'   => $request->file('image')->getClientOriginalExtension(),
             'is_active'         => $request->get('is_active'),
-            'is_featured'       => $request->get('is_featured')
-
+            'is_featured'       => $request->get('is_featured'),
+            'image_weight'      => $request->get('image_weight')
         ]);
 
         // save model
-
         $marketingImage->save();
 
         // get instance of file
-
         $file = $this->getUploadedFile();
 
         // pass in the file and the model
-
         $this->saveImageFiles($file, $marketingImage);
 
-        alert()->success('Congrats!', 'Marketing Image And Thumbnail Created!');
-
         return redirect()->route('marketing-image.show', [$marketingImage]);
+
     }
 
     /**
@@ -130,27 +134,27 @@ class MarketingImageController extends Controller
 
     public function update($id, EditImageRequest $request)
     {
+
         $marketingImage = MarketingImage::findOrFail($id);
 
         $this->setUpdatedModelValues($request, $marketingImage);
 
         // if file, we have additional requirements before saving
-
         if ($this->newFileIsUploaded()) {
 
             $this->deleteExistingImages($marketingImage);
+
             $this->setNewFileExtension($request, $marketingImage);
 
         }
 
-
         $marketingImage->save();
 
         // check for file, if new file, overwrite existing file
-
         if ($this->newFileIsUploaded()){
 
             $file = $this->getUploadedFile();
+
             $this->saveImageFiles($file, $marketingImage);
 
         }
@@ -159,9 +163,8 @@ class MarketingImageController extends Controller
 
         $imagePath = $this->imagePath;
 
-        alert()->success('Congrats!', 'image edited!');
-
         return view('marketing-image.show', compact('marketingImage', 'thumbnailPath', 'imagePath'));
+
     }
 
     /**
@@ -173,13 +176,12 @@ class MarketingImageController extends Controller
 
     public function destroy($id)
     {
+
         $marketingImage = MarketingImage::findOrFail($id);
 
         $this->deleteExistingImages($marketingImage);
 
         MarketingImage::destroy($id);
-
-        alert()->error('Notice', 'image deleted!');
 
         return redirect()->route('marketing-image.index');
 
@@ -207,6 +209,7 @@ class MarketingImageController extends Controller
 
         $marketingImage->is_active = $request->get('is_active');
         $marketingImage->is_featured = $request->get('is_featured');
+        $marketingImage->image_weight = $request->get('image_weight');
 
     }
 }
