@@ -54,6 +54,21 @@
         </div>
 
 
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+
+            <label class="control-label">Email</label>
+
+            <input type="text" class="form-control" name="email" value="{{ $user->email }}" />
+
+            @if ($errors->has('email'))
+
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+
+            @endif
+        </div>
+
 
         <!-- is_admin Form Input -->
 
@@ -72,13 +87,46 @@
             @if ($errors->has('is_admin'))
 
                 <span class="help-block">
-                <strong>{{ $errors->first('is_admin') }}</strong>
+                    <strong>{{ $errors->first('is_admin') }}</strong>
                 </span>
 
             @endif
 
         </div>
 
+        <div class="form-group{{ $errors->has('is_subscribed') ? ' has-error' : '' }}">
+
+            <label class="control-label">Is subscribed?</label>
+
+            <select class="form-control" id="is_subscribed" name="is_subscribed">
+                <option value="{{ $user->is_subscribed }}">{{ $user->showNewsletterStatusOf($user) }}</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
+            @if ($errors->has('is_subscribed'))
+
+                <span class="help-block">
+                    <strong>{{ $errors->first('is_subscribed') }}</strong>
+                </span>
+
+            @endif
+        </div>
+
+        <div class="form-group{{ $errors->has('status_id') ? ' has-error' : '' }}">
+
+            <label class="control-label">Status ID (7 or 10)</label>
+
+            <input type="text" class="form-control" name="status_id" value="{{ $user->status_id }}" />
+
+            @if ($errors->has('status_id'))
+
+                <span class="help-block">
+                    <strong>{{ $errors->first('status_id') }}</strong>
+                </span>
+
+            @endif
+        </div>
 
         <div class="form-group">
 

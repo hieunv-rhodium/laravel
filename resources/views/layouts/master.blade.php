@@ -3,6 +3,7 @@
 <head>
 
     @include('layouts.meta')
+
     <link rel="icon" href="../../favicon.ico"/>
 
     @yield('title')
@@ -17,6 +18,8 @@
 
     @include('layouts.facebook')
 
+    <div id="app">
+
     @include('layouts.nav')
 
     <div class="container theme-showcase" role="main">
@@ -26,6 +29,8 @@
         @include('layouts.bottom')
     
     </div> <!-- /container -->
+
+    </div>
 
     @include('layouts.scripts')
     

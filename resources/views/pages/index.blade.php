@@ -17,9 +17,19 @@
       data-show-faces="true">
     </div>
 
+<example></example>
+
 @include('pages.slider')
 <br/>
 <br/>
+
+@component('alert')
+   @slot('title')
+        fucking
+   @endslot
+    Xuat hien alert <br/>
+    Fuck tet ga
+@endcomponent
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
 

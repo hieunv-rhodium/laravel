@@ -22,9 +22,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $categories = Categories::paginate(10);
-
-        return view('category.index', compact('categories'));
+        return view('category.index');
 
     }
 
@@ -72,14 +70,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categories, $slug = '')
+    public function show($id)
     {
-        if($categories->slug !== $slug) {
-            return Redirect::route('categories.show', [
-                'id' => $categories->id,
-                'slug' => $categories->slug
-            ], 301);
-        }
+        $categories = Categories::findOrFail($id);
 
         return view('category.show', compact('categories'));
     }
@@ -106,6 +99,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $categories = Categories::findOrFail($id);
+
         $this->validate($request, [
 
             'name' => 'required|string|max:30|unique:categories,name,'.$categories->id
@@ -121,7 +115,7 @@ class CategoryController extends Controller
 
         alert()->success('Thành công','Bạn đã cập nhật danh mục');
 
-        return Redirect::route('categories.show', [
+        return Redirect::route('category.show', [
             'categories' => $categories, 'slug' => $slug
         ]);
 
@@ -139,7 +133,7 @@ class CategoryController extends Controller
 
         alert()->overlay('Lưu ý', 'Bạn đã xóa danh mục','error');
 
-        return Redirect::route('categories.index');
+        return Redirect::route('category.index');
 
     }
 }

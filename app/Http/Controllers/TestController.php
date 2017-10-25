@@ -4,23 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\EmailNotProvidedException;
 use Illuminate\Http\Request;
+use App\Utilities\SomethingNew;
+use App\Utilities\Contracts\RocketShipContract;
+
 
 class TestController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RocketShipContract $rocket)
     {
-        //
-//        $beatles = ['John','Paul','George','Ringo'];
-//        alert()->overlay('Listen', 'I hear beatle music!', 'success');
-//        return view('test.index',compact('beatles'));
-        throw new EmailNotProvidedException('Facebook');
-    }
 
+        return $rocket->blastOff();
+
+    }
     /**
      * Show the form for creating a new resource.
      *

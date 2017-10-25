@@ -70,7 +70,11 @@ Route::resource('widget', 'WidgetController', ['except' => ['show', 'create']]);
 
 // Categories route
 
-Route::resource('categories','CategoryController');
+Route::get('categories/create' , 'CategoryController@create')->name('category.create');
+
+Route::get('categories/{id}-{slug?}' , 'CategoryController@show')->name('category.show');
+
+Route::resource('categories','CategoryController', ['except' => ['show' , 'create']]);
 
 // Product route
 
@@ -96,3 +100,21 @@ Route::post('settings', 'SettingsController@update')->name('user-update');
 
 Route::resource('marketing-image', 'MarketingImageController');
 
+
+// API Widget
+
+Route::get('api/widget-data', 'ApiController@widgetData');
+
+
+// Api Images
+
+Route::get('api/marketing-image-data' , 'ApiController@marketingImageData');
+
+
+// Api User
+
+Route::get('api/user-data' , 'ApiController@userData');
+
+
+//Api Category
+Route::get('api/category-data' , 'ApiController@categoryData');

@@ -27,6 +27,6 @@ class Products extends SuperModel
 
     public function category()
     {
-        return $this->belongsTo('App\Categoires');
+        return $this->belongsTo('App\Categories');
     }
 }

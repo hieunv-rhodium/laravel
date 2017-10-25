@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 
+
 class User extends Authenticatable
 {
     use Notifiable, OwnsRecord, HasModelTrait;
@@ -54,9 +55,9 @@ class User extends Authenticatable
 
         return  $user->update(['name'  => $request->name,
             'email' => $request->email,
-            'is_subscribed' => $request->is_subscribed,
             'is_admin' => $request->is_admin,
-            'status_id' => $request->status_id,
+            'is_subscribed' => $request->is_subscribed,
+            'status_id' => $request->status_id
         ]);
 
     }

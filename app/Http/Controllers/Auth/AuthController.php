@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\RegistrationCompleted;
 use App\Exceptions\NoActiveAccountException;
 use App\Http\AuthTraits\Social\ManagesSocialAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Http\Requests;
 use Socialite;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends RegisterController
 {
@@ -79,6 +80,20 @@ class AuthController extends RegisterController
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        event(new RegistrationCompleted($user));
+
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+
     }
 
 }
