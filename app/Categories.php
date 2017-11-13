@@ -18,4 +18,9 @@ class Categories extends SuperModel
     {
         return $this->hasMany('App\Products');
     }
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
 }

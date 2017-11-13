@@ -34,3 +34,34 @@ $factory->define(App\Widget::class, function ($faker) {
         'user_id' => $user_id   ,
     ];
 });
+
+$factory->define(App\Message::class, function ($faker) {
+
+    $message = $faker->unique()->word . ' ' . $faker->unique()->word;
+
+    return [
+        'message' => $message,
+        'user_id' => 1
+    ];
+
+});
+
+$factory->define(App\Categories::class, function (Faker\Generator $faker) {
+
+    return [
+
+        'name' => $faker->unique()->word,
+
+    ];
+
+});
+
+$factory->define(App\Subcategory::class, function (Faker\Generator $faker) {
+    return [
+
+        'name' => $faker->unique()->word,
+        'category_id' => $faker->numberBetween($min = 1, $max = 4),
+
+    ];
+
+});

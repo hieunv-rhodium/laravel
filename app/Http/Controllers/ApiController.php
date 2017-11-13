@@ -8,6 +8,9 @@ use App\Queries\GridQueries\WidgetQuery;
 use App\Queries\GridQueries\MarketingImageQuery;
 use App\Queries\GridQueries\UserQuery;
 use App\Queries\GridQueries\CategoryQuery;
+use App\Queries\GridQueries\SubcategoryQuery;
+use App\Queries\GridQueries\LessonQuery;
+
 
 class ApiController extends Controller
 {
@@ -37,6 +40,20 @@ class ApiController extends Controller
     {
 
         return GridQuery::sendData($request, new categoryQuery);
+
+    }
+
+    public function subcategoryData(Request $request)
+    {
+
+        return GridQuery::sendData($request, new subcategoryQuery);
+
+    }
+
+    public function lessonData(Request $request)
+    {
+
+        return GridQuery::sendData($request, new lessonQuery);
 
     }
 

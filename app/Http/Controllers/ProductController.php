@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Products;
+use App\Categories;
 use Redirect;
 
 
@@ -33,7 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $cat = \App\Categories::pluck('name','id');
+        $cat = Categories::pluck('name','id');
         $abc = ['a','b','c'];
         return view('product.create', compact('cat','abc'));
     }
@@ -91,7 +92,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Products::findOrFail($id);
-        $cat = \App\Categories::pluck('name','id');
+        $cat = Categories::pluck('name','id');
         return view('product.edit', compact('product', 'cat'));
     }
 

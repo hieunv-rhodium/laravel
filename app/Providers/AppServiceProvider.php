@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use DB;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,16 +14,26 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 //       View composer
-//        view()->composer('layouts.bottom', function($view){
-//
-//        $view->with('copyright', \App\Utilities\Copyright::displayNotice());
-//
-//        });
+        view()->composer('layouts.bottom', function($view){
+
+        $view->with('copyright', \App\Utilities\Copyright::displayNotice());
+
+        });
+
+        //Xem log query
+        DB::enableQueryLog();
+        DB::listen(function ($query) {
+
+            // $query->sql
+            // $query->bindings
+            // $query->time
+        });
+
 
         //share everywhere
-        $value = \App\Utilities\Copyright::displayNotice();
-
-        view()->share('copyright', $value);
+//        $value = \App\Utilities\Copyright::displayNotice();
+//
+//        view()->share('copyright', $value);
 
     }
 

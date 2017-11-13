@@ -1,4 +1,4 @@
-
+window.Vue = require('vue');
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,20 +7,20 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+/**
+ * We will require in our components.js file, which contains our component
+ * files.  Putting them in their own file reduces clutter.
+ */
+
+require('./components');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
+ * once it gets too big, we will just require it in like other files.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('widget-grid', require('./components/WidgetGrid.vue'));
-Vue.component('marketing-image-grid', require('./components/MarketingImageGrid.vue'));
-Vue.component('user-grid', require('./components/UserGrid.vue'));
-Vue.component('category-grid', require('./components/CategoryGrid.vue'));
+require('./vue-root');
 
-const app = new Vue({
-    el: '#app'
-});
+

@@ -1,5 +1,5 @@
 <?php
-
+use App\Events\MessagePosted;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +21,22 @@ Route::get('login', 'Auth\AuthController@showLoginForm')->name('login');
 Route::post('login', 'Auth\AuthController@login');
 Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 
+
+// Chat routes
+Route::get('/chat-messages', 'ChatController@getMessages')->middleware('auth');
+
+Route::post('/chat-messages', 'ChatController@postMessage')->middleware('auth');
+
+Route::get('/chat', 'ChatController@index')->middleware('auth');
+
+
+// Username route
+Route::get('/username', 'UsernameController@show')->middleware('auth');
+
 // home page route
 
 Route::get('/', 'PagesController@index')->name('home');
+
 
 // Password routes
 
@@ -57,7 +70,7 @@ Route::get('terms-of-service', 'PagesController@terms');
 
 // test route
 
-Route::get('test', 'TestController@index')->middleware(['auth', 'throttle:5']);
+Route::get('test', 'TestController@index')->middleware(['auth', 'throttle:15']);
 
 
 // Widget route
@@ -70,11 +83,12 @@ Route::resource('widget', 'WidgetController', ['except' => ['show', 'create']]);
 
 // Categories route
 
-Route::get('categories/create' , 'CategoryController@create')->name('category.create');
+Route::resource('categories','CategoryController');
 
-Route::get('categories/{id}-{slug?}' , 'CategoryController@show')->name('category.show');
 
-Route::resource('categories','CategoryController', ['except' => ['show' , 'create']]);
+// Subcategory route
+Route::resource('subcategory' , 'SubcategoryController');
+
 
 // Product route
 
@@ -116,5 +130,21 @@ Route::get('api/marketing-image-data' , 'ApiController@marketingImageData');
 Route::get('api/user-data' , 'ApiController@userData');
 
 
-//Api Category
+// Api Category
 Route::get('api/category-data' , 'ApiController@categoryData');
+
+// Api subCategory
+Route::get('api/subcategory-data' , 'ApiController@subcategoryData');
+
+
+// Lesson
+Route::get('lesson/create' , 'LessonController@create')->name('lesson.create');
+
+Route::get('lesson/{lesson}-{slug?}' , 'LessonController@show')->name('lesson.show');
+
+Route::resource('lesson' , 'LessonController', ['except' => ['show','create']]);
+
+
+// Api lesson
+Route::get('api/lesson-data' , 'ApiController@lessonData');
+
